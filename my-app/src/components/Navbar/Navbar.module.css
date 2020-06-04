@@ -1,14 +1,40 @@
-.nav {
-    grid-area: n;
-    background-color: burlywood;
-    padding: 20px;
+.navbarWrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(171, 174, 177);
+  padding: 10px;
+  width: 20%;
 }
 
-.item a{
-    color: white;
-    text-decoration: none;
+.item a {
+  color: rgb(204, 213, 235);
+  text-decoration: none;
 }
 
 .item a.activeLink {
-    color: gold;
+  color: gold;
+}
+
+.nav {
+  margin-bottom: 20px;
+}
+.friends {
+  border: 1px solid;
+  border-radius: 3px;
+  border-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 200px;
+  background-color: rgb(215, 223, 223);
+}
+
+.friends_row1 {
+  display: flex;
+  justify-content: space-around;
+}
+
+.friends_row2 {
+  display: flex;
+  justify-content: space-around;
 }

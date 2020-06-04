@@ -1,0 +1,14 @@
+
+.friendFace{
+  width: 60px;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.friendFace img {
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+}

@@ -1,17 +1,19 @@
 import React from 'react';
 import s from './Profile.module.css';
 import MyPosts from './MyPosts/MyPosts';
+import ProfileInfo from './ProfileInfo/ProfileInfo';
+import { propsTypePost } from './MyPosts/Post/Post';
 
-const Profile = () => {
+export type propsTypePostsState = {
+  state: {
+    postData: Array<propsTypePost>
+  }
+}
+const Profile = (props: propsTypePostsState) => {
   return (
     <div>
-      <div>
-        <img src='https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&h=350' />
-      </div>
-      <div>
-        ava + description
-      </div>
-      <MyPosts />
+      <ProfileInfo />
+      <MyPosts postData={props.state.postData} />
     </div>
   )
 }

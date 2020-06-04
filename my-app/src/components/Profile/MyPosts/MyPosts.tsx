@@ -1,18 +1,28 @@
 import React from 'react';
 import s from './MyPosts.module.css';
-import Post from './Post/Post';
+import { propsType } from '../../../App';
+import Post, { propsTypePost } from './Post/Post';
 
-const MyPosts = () => {
+export type propsTypePosts = {
+    postData: Array<propsTypePost>
+}
+
+const MyPosts = (props:propsTypePosts) => {
+
   return (
-    <div>
-      My posts
+    <div className={s.postsBlock}>
+      <h3>My posts</h3>
       <div>
-        <textarea></textarea>
+        <div>
+          <textarea></textarea>
+        </div>
         <button>Add post</button>
       </div>
       <div className={s.posts}>
-        <Post message='Hi, how are you?' />
-        <Post message="It's my first post" />
+        {props.postData.map(p =>
+          <Post message={p.message} id={p.id} likesCount={p.likesCount} />
+        )
+        }
       </div>
     </div>
   )
