@@ -19,7 +19,8 @@ export type propsType =
       },
 
       profilePage: {
-        postData: Array<propsTypePost>
+        postData: Array<propsTypePost>;
+        newPostText: string
       },
 
       friends: {
@@ -29,7 +30,9 @@ export type propsType =
           face: string;
         }>
       }
-    }
+    },
+    addPost: () => void;
+    updateNewPostText: (newText:string) => void
   }
 
 const App = (props: propsType) => {
@@ -45,7 +48,10 @@ const App = (props: propsType) => {
                 state={props.state.dialogsPage} />} />
             <Route path="/profile"
               render={() => <Profile
-                state={props.state.profilePage} />} />
+                profilePage={props.state.profilePage} 
+                addPost={props.addPost}
+                updateNewPostText={props.updateNewPostText}
+                />} />
           </div>
         </div>
       </div>

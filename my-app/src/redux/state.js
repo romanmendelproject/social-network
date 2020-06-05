@@ -1,4 +1,8 @@
+import { rerenderEntireTree } from '../render';
+
 let state = {
+
+
   dialogsPage : {
     dialogsData: [
       { id: 1, name: "Inna" , face: "https://i.dailymail.co.uk/i/pix/2014/10/21/1413904504297_Image_galleryImage_07_Oct_2014_Los_Angeles_C.JPG"},
@@ -23,6 +27,7 @@ let state = {
       { id: 4, message: "444444444", likesCount: 1 },
       { id: 5, message: "444444444", likesCount: 55 },
     ],
+    newPostText : "Hello1"
   },
   
   friends : {
@@ -37,5 +42,20 @@ let state = {
   },
 
 };
+export let addPost = () => {
+  let newPost = {
+    id:5,
+    message: state.profilePage.newPostText,
+    likesCount: 0
+  }
+  state.profilePage.postData.push(newPost)
+  state.profilePage.newPostText = ""
+  rerenderEntireTree(state)
+}
+
+export let updateNewPostText = (newText) => {
+  state.profilePage.newPostText = newText
+  rerenderEntireTree(state)
+}
 
 export default state
