@@ -16,6 +16,7 @@ export type propsType =
       dialogsPage: {
         dialogsData: Array<propsTypeDialog>;
         messagesData: Array<propsTypeMessage>;
+        newMessageText: string
       },
 
       profilePage: {
@@ -31,8 +32,7 @@ export type propsType =
         }>
       }
     },
-    addPost: () => void;
-    updateNewPostText: (newText:string) => void
+    dispatch: () => void;
   }
 
 const App = (props: propsType) => {
@@ -45,12 +45,13 @@ const App = (props: propsType) => {
           <div className='app-wrapper-content'>
             <Route exact path="/dialogs"
               render={() => <Dialogs
-                state={props.state.dialogsPage} />} />
+                dialogsPage={props.state.dialogsPage} 
+                dispatch={props.dispatch}
+                />} />
             <Route path="/profile"
               render={() => <Profile
                 profilePage={props.state.profilePage} 
-                addPost={props.addPost}
-                updateNewPostText={props.updateNewPostText}
+                dispatch={props.dispatch}
                 />} />
           </div>
         </div>

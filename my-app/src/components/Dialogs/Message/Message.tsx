@@ -1,13 +1,10 @@
 import React from 'react';
 import s from './../Dialogs.module.css';
-import { NavLink } from 'react-router-dom';
-
 
 export type propsTypeMessage = {
     id: number;
     message: string;
 }
-
 
 const Message = (props: propsTypeMessage) => {
     
