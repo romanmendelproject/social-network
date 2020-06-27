@@ -1,5 +1,7 @@
-import profileReduser from "./profile-reducer";
-import dialogsReduser from "./dialogs-reducer";
+import profileReducer from "./profile-reducer";
+import dialogsReducer from "./dialogs-reducer";
+
+
 
 let store = {
   _state: {
@@ -101,8 +103,8 @@ let store = {
     this._rerenderEntireTree = observer;
   },
   dispatch(action) {
-    this._state.profilePage = profileReduser(this._state.profilePage, action);
-    this._state.dialogsPage = dialogsReduser(this._state.dialogsPage, action);
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
     this._rerenderEntireTree(this._state);
   },
 };
