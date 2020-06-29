@@ -10,6 +10,7 @@ export type propsTypePosts = {
 }
 
 const MyPosts = (props: propsTypePosts) => {
+  debugger
   let newPostElement: any = React.createRef();
 
   let onAddPost = () => {

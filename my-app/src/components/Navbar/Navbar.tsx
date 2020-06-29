@@ -1,15 +1,9 @@
 import React from 'react';
 import s from './Navbar.module.css';
 import { NavLink } from 'react-router-dom';
-import Friends, { friendsTypeItem } from './Friends/Friends';
+import FriendsContainer from './Friends/Friends_Container';
 
-type friendsType = {
-    state: {
-        friendsData: Array<friendsTypeItem>
-    }
-}
-
-const Navbar = (props: friendsType) => {
+const Navbar = () => {
     return (
         <div className={s.navbarWrapper}>
             <div className={s.nav}>
@@ -18,6 +12,9 @@ const Navbar = (props: friendsType) => {
                 </div>
                 <div className={`${s.item} ${s.active}`}>
                     <NavLink to="/dialogs" activeClassName={s.activeLink}>Messages</NavLink>
+                </div>
+                <div className={`${s.item} ${s.active}`}>
+                    <NavLink to="/users" activeClassName={s.activeLink}>Users</NavLink>
                 </div>
                 <div className={s.item}>
                     <a>News</a>
@@ -29,18 +26,7 @@ const Navbar = (props: friendsType) => {
                     <a>Settings</a>
                 </div>
             </div>
-            <div className={s.friends}>
-                < div className={s.friends_row1} >
-                    {props.state.friendsData.slice(0, 3).map(f =>
-                        <Friends id={f.id} name={f.name} face={f.face} />
-                    )}
-                </div>
-                < div className={s.friends_row2} >
-                    {props.state.friendsData.slice(3, 6).map(f =>
-                        <Friends id={f.id} name={f.name} face={f.face} />
-                    )}
-                </div >
-            </div >
+            <FriendsContainer />
 
         </div >
     )

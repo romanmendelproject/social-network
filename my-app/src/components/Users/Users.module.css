@@ -1,0 +1,49 @@
+.userPhoto{
+    width: 100px;
+    height: 100px;
+}
+
+.UsersContainer{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.UserContainer{
+    display: flex;
+    padding: 10px;
+    /* border: 1px solid grey; */
+    margin: 3px 0;
+}
+
+.UserContainerImg img{
+    width: 100px;
+}
+
+.UserContainerImg{
+    display: flex;
+    flex-direction: column;
+}
+
+.UserContainerBody{
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+    padding: 10px;
+    border: 1px solid grey;
+    margin: 3px;
+    border-radius: 10px;
+    
+}
+
+.UserContainerName{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.UserContainerLocation{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

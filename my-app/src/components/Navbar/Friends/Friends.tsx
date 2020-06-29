@@ -1,21 +1,23 @@
 import React from 'react';
-import s from './Friends.module.css';
-import { NavLink } from 'react-router-dom';
+import FriendsItem, { friendsTypeItem } from './FriensItem/FriendsItem';
+import { propsTypePosts } from '../../Profile/MyPosts/MyPosts';
+import s from '../Navbar.module.css';
 
-export type friendsTypeItem = {
-    id: number;
-    name: string;
-    face: string;
-}
 
-const Friends = (props: friendsTypeItem) => {
+const Friends = (props: any ) => {
     return (
-        <div className={s.friendFace}>
-            <img src={props.face} />
-            <span>{props.name}</span>
-        </div>
-
-    )
+        <div className={s.friends}>
+            < div className={s.friends_row1} >
+                {props.friendsData.slice(0, 3).map((f: friendsTypeItem) =>
+                    <FriendsItem id={f.id} name={f.name} face={f.face} />
+                )}
+            </div>
+            < div className={s.friends_row2} >
+                {props.friendsData.slice(3, 6).map((f: friendsTypeItem) =>
+                    <FriendsItem id={f.id} name={f.name} face={f.face} />
+                )}
+            </div >
+        </div >
+)
 }
-
 export default Friends;
