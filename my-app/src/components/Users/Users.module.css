@@ -47,3 +47,7 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
+.selectedPage{
+    font-weight: bold;
+}

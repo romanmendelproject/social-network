@@ -12,7 +12,7 @@ export type propsTypeUsers = {
 
 export type typeUser = {
   id: number,
-  followed: Boolean,
+  followed: boolean,
   name: string,
   status: string,
   location: typeLocation,
@@ -30,18 +30,22 @@ export type typePhotos = {
 };
 
 class Users extends React.Component <propsTypeUsers>{
-  getUsers = () => {
-    if (this.props.users.length === 0) {
-      axios.get("https://social-network.samuraijs.com/api/1.0/users")
-        .then(response => {
-          this.props.setUsers(response.data.items);
-        });
-
-    }
+  componentDidMount() {
+    axios.get("https://social-network.samuraijs.com/api/1.0/users")
+    .then(response => {
+      this.props.setUsers(response.data.items);
+    });
   }
+
   render() {
     return <div className={s.UsersContainer}>
-    <button onClick={this.getUsers}> Get Users</button>
+      <div>
+        <span>1</span>
+        <span className={s.selectedPage}>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>5</span>
+      </div>
     {
       this.props.users.map(u => <div key={u.id}>
         <div className={s.UserContainer}>
