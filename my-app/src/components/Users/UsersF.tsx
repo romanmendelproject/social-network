@@ -29,27 +29,27 @@ export type typePhotos = {
   large: string,
 };
 
-class Users extends React.Component <propsTypeUsers>{
-  getUsers = () => {
-    if (this.props.users.length === 0) {
+let Users = (props: propsTypeUsers) => {
+  let getUsers = () => {
+    if (props.users.length === 0) {
       axios.get("https://social-network.samuraijs.com/api/1.0/users")
         .then(response => {
-          this.props.setUsers(response.data.items);
+          props.setUsers(response.data.items);
         });
 
     }
   }
-  render() {
-    return <div className={s.UsersContainer}>
-    <button onClick={this.getUsers}> Get Users</button>
+
+  return <div className={s.UsersContainer}>
+    <button onClick={getUsers}> Get Users</button>
     {
-      this.props.users.map(u => <div key={u.id}>
+      props.users.map(u => <div key={u.id}>
         <div className={s.UserContainer}>
           <div className={s.UserContainerImg}>
             <img src={u.photos.small != null ? u.photos.small : userPhoto} alt="" />
             {u.followed
-              ? <button onClick={() => { this.props.unfollow(u.id) }}>Unfollow</button>
-              : <button onClick={() => { this.props.follow(u.id) }}>Follow</button>}
+              ? <button onClick={() => { props.unfollow(u.id) }}>Unfollow</button>
+              : <button onClick={() => { props.follow(u.id) }}>Follow</button>}
           </div>
           <div className={s.UserContainerBody}>
             <div className={s.UserContainerName}>
@@ -67,8 +67,6 @@ class Users extends React.Component <propsTypeUsers>{
 
     }
   </div>
-  }
-}
-
+};
 
 export default Users;
