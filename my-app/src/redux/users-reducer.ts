@@ -18,8 +18,8 @@ let initialState = {
     }
   ],
   pageSize: 5,
-  totalUsersCount: 0,
-  currentPage: 2
+  totalUsersCount: 20,
+  currentPage: 1
 };
 
 type InitialStateType = typeof initialState;
