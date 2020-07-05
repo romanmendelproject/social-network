@@ -39,8 +39,9 @@ let initialState = {
       ],
 }
 
+type InitialStateType = typeof initialState;
 
-const friendsReducer = (state = initialState, action) => {
+const friendsReducer = (state:InitialStateType = initialState, action:Object):InitialStateType => {
       return state;
 };
 

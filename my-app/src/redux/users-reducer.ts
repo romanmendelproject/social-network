@@ -3,6 +3,8 @@ import { typeUser } from "../components/Users/Users";
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+const SET_TOTAL_USER_COUNT = "SET_TOTAL_USER_COUNT";
 
 let initialState = {
   users: [
@@ -16,7 +18,8 @@ let initialState = {
     }
   ],
   pageSize: 5,
-  totalUsersCount: 0
+  totalUsersCount: 0,
+  currentPage: 2
 };
 
 type InitialStateType = typeof initialState;
@@ -36,10 +39,22 @@ type SetUsersActionType = {
   users: Array<typeUser>
 };
 
+type SetCurrentPageType = {
+  type: typeof SET_CURRENT_PAGE
+  currentPage: number
+};
+
+type SetTotalUserCountType = {
+  type: typeof SET_TOTAL_USER_COUNT
+  totalUsersCount: number
+};
+
 type UsersActionTypes =
-SetUsersActionType
+  SetUsersActionType
   | FollowActionType
   | UnFollowActionType
+  | SetCurrentPageType
+  | SetTotalUserCountType
 
 const usersReducer = (state: InitialStateType = initialState, action: UsersActionTypes): InitialStateType => {
   switch (action.type) {
@@ -66,7 +81,13 @@ const usersReducer = (state: InitialStateType = initialState, action: UsersActio
       };
     }
     case SET_USERS: {
-      return { ...state, users: [...state.users, ...action.users] };
+      return { ...state, users: action.users };
+    }
+    case SET_CURRENT_PAGE: {
+      return { ...state, currentPage: action.currentPage };
+    }
+    case SET_TOTAL_USER_COUNT: {
+      return { ...state, totalUsersCount: action.totalUsersCount };
     }
     default:
       return state;
@@ -86,6 +107,16 @@ export const unfolowAC = (userId: Number) => ({
 export const setUsersAC = (users: Array<typeUser>) => ({
   type: SET_USERS,
   users,
+});
+
+export const setCurrentPageAC = (currentPage: number) => ({
+  type: SET_CURRENT_PAGE,
+  currentPage
+});
+
+export const setTotalUsersCountAC = (totalUsersCount: number) => ({
+  type: SET_TOTAL_USER_COUNT,
+  totalUsersCount
 });
 
 export default usersReducer;
