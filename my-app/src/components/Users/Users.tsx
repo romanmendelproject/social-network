@@ -1,6 +1,7 @@
 import React from "react";
 import userPhoto from "../../assets/images/user2.jpeg"
 import s from "./Users.module.css";
+import { NavLink } from "react-router-dom";
 
 export type propsTypeUsers = {
   users: Array<typeUser>,
@@ -10,6 +11,7 @@ export type propsTypeUsers = {
   totalUsersCount: number,
   pageSize: number,
   currentPage: number,
+  isFetching:boolean
 };
 
 
@@ -54,7 +56,9 @@ let Users = (props: propsTypeUsers) => {
       props.users.map((u) => <div key={u.id}>
         <div className={s.UserContainer}>
           <div className={s.UserContainerImg}>
+            <NavLink to={'/profile/' + u.id}>
             <img src={u.photos.small != null ? u.photos.small : userPhoto} alt="" />
+            </NavLink>
             {u.followed
               ? <button onClick={() => { props.unfollow(u.id) }}>Unfollow</button>
               : <button onClick={() => { props.follow(u.id) }}>Follow</button>}

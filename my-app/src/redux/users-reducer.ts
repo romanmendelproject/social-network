@@ -5,6 +5,7 @@ const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const SET_TOTAL_USER_COUNT = "SET_TOTAL_USER_COUNT";
+const TOOGLE_IS_FETCHING = "TOOGLE_IS_FETCHING";
 
 let initialState = {
   users: [
@@ -19,7 +20,8 @@ let initialState = {
   ],
   pageSize: 5,
   totalUsersCount: 20,
-  currentPage: 1
+  currentPage: 1,
+  isFetching: false
 };
 
 type InitialStateType = typeof initialState;
@@ -49,12 +51,18 @@ type SetTotalUserCountType = {
   totalUsersCount: number
 };
 
+type toogleIsFetching = {
+  type: typeof TOOGLE_IS_FETCHING
+  isFetching: boolean
+};
+
 type UsersActionTypes =
   SetUsersActionType
   | FollowActionType
   | UnFollowActionType
   | SetCurrentPageType
   | SetTotalUserCountType
+  | toogleIsFetching
 
 const usersReducer = (state: InitialStateType = initialState, action: UsersActionTypes): InitialStateType => {
   switch (action.type) {
@@ -89,35 +97,44 @@ const usersReducer = (state: InitialStateType = initialState, action: UsersActio
     case SET_TOTAL_USER_COUNT: {
       return { ...state, totalUsersCount: action.totalUsersCount };
     }
+    case TOOGLE_IS_FETCHING: {
+      return { ...state, isFetching: action.isFetching };
+    }
     default:
       return state;
   }
 };
 
-export const followAC = (userId: Number) => ({
+export const follow = (userId: Number) => ({
   type: FOLLOW,
   userId,
 });
 
-export const unfolowAC = (userId: Number) => ({
+export const unfollow = (userId: Number) => ({
   type: UNFOLLOW,
   userId,
 });
 
-export const setUsersAC = (users: Array<typeUser>) => ({
+export const setUsers = (users: Array<typeUser>) => ({
   type: SET_USERS,
   users,
 });
 
-export const setCurrentPageAC = (currentPage: number) => ({
+export const setCurrentPage = (currentPage: number) => ({
   type: SET_CURRENT_PAGE,
   currentPage
 });
 
-export const setTotalUsersCountAC = (totalUsersCount: number) => ({
+export const setTotalUsersCount = (totalUsersCount: number) => ({
   type: SET_TOTAL_USER_COUNT,
   totalUsersCount
 });
+
+export const toogleIsFetching = (isFetching: boolean) => ({
+  type: TOOGLE_IS_FETCHING,
+  isFetching
+});
+
 
 export default usersReducer;
 

@@ -1,9 +1,12 @@
 .header {
-    height: 60px;
-    background-color: rgb(83, 86, 90);
+  height: 60px;
+  background-color: rgb(83, 86, 90);
 }
 
 .header img {
-    width: 20px;
+  width: 20px;
 }
 
+.loginBlock {
+    float: right;
+}
