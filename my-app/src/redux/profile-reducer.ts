@@ -1,5 +1,8 @@
+import { ProfileType } from "../components/Profile/Profile";
+
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+const SET_USER_PROFILE = "SET_USER_PROFILE"
 
 type AddPostActionType = {
   type: typeof ADD_POST
@@ -10,7 +13,15 @@ type UpdateNewPostTextActionType = {
   newText: string
 }
 
-type ProfileActionType = AddPostActionType | UpdateNewPostTextActionType
+
+type setUserProfileActionType = {
+  type: typeof SET_USER_PROFILE,
+  profile: ProfileType
+}
+
+type ProfileActionType = AddPostActionType
+ | UpdateNewPostTextActionType
+ | setUserProfileActionType
 
 let initialState = {
   postData: [
@@ -21,11 +32,19 @@ let initialState = {
     { id: 5, message: "444444444", likesCount: 55 },
   ],
   newPostText: "Hello1",
+  profile: {
+      userId: 0,
+      lookingForAJob: false,
+      lookingForAJobDescription: '',
+      fullName: '',
+      contacts: {},
+      photos: {},
+  }
 };
 
 type InitialStateType = typeof initialState;
 
-const profileReducer = (state:InitialStateType = initialState, action : ProfileActionType):InitialStateType => {
+const profileReducer = (state: InitialStateType = initialState, action: ProfileActionType): InitialStateType => {
   switch (action.type) {
     case ADD_POST:
       let newPost = {
@@ -43,7 +62,11 @@ const profileReducer = (state:InitialStateType = initialState, action : ProfileA
         ...state,
         newPostText: action.newText,
       };
-
+    case SET_USER_PROFILE:
+      return {
+        ...state,
+        profile: action.profile,
+      };
     default:
       return state;
   }
@@ -56,6 +79,11 @@ export const addPostActionCreater = () => ({
 export const updateNewPostTextActionCreater = (text: string) => ({
   type: UPDATE_NEW_POST_TEXT,
   newText: text,
+});
+
+export const setUserProfile = (profile: ProfileType) => ({
+  type: SET_USER_PROFILE,
+  profile
 });
 
 export default profileReducer;
