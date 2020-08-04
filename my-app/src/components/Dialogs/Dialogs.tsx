@@ -2,6 +2,7 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import DialogItem, { propsTypeDialog } from './DialogItem/DialogItem';
 import Message, { propsTypeMessage } from './Message/Message';
+import { Redirect } from 'react-router-dom';
 
 
 export type propsTypeDialogs = {
@@ -10,6 +11,7 @@ export type propsTypeDialogs = {
         messagesData: Array<propsTypeMessage>;
         newMessageText: string;
     },
+    isAuth: boolean
     addMessage: () => void;
     onMessangeChange: (newMessage: string) => void;
 }
@@ -23,7 +25,7 @@ const Dialogs = (props: propsTypeDialogs) => {
     const onMessangeChange = () => {
         props.onMessangeChange(newMessageElement.current.value)
     }
-
+    if (!props.isAuth) return <Redirect to={"/login"} />
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>

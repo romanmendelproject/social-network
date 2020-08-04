@@ -1,4 +1,5 @@
 import { ProfileType } from "../components/Profile/Profile";
+import { usersAPI } from "../api/api";
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
@@ -20,8 +21,8 @@ type setUserProfileActionType = {
 }
 
 type ProfileActionType = AddPostActionType
- | UpdateNewPostTextActionType
- | setUserProfileActionType
+  | UpdateNewPostTextActionType
+  | setUserProfileActionType
 
 let initialState = {
   postData: [
@@ -33,12 +34,12 @@ let initialState = {
   ],
   newPostText: "Hello1",
   profile: {
-      userId: 0,
-      lookingForAJob: false,
-      lookingForAJobDescription: '',
-      fullName: '',
-      contacts: {},
-      photos: {},
+    userId: 0,
+    lookingForAJob: false,
+    lookingForAJobDescription: '',
+    fullName: '',
+    contacts: {},
+    photos: {},
   }
 };
 
@@ -85,5 +86,13 @@ export const setUserProfile = (profile: ProfileType) => ({
   type: SET_USER_PROFILE,
   profile
 });
+
+export const getProfile = (userId: number) => {
+  return (dispatch: any) => {
+    usersAPI.getProfile(userId).then(data => {
+      dispatch(setUserProfile(data));
+    });
+  }
+}
 
 export default profileReducer;

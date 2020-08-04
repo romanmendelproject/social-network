@@ -2,18 +2,16 @@ import React from "react";
 import userPhoto from "../../assets/images/user2.jpeg"
 import s from "./Users.module.css";
 import { NavLink } from "react-router-dom";
-import axios from 'axios';
-import { usersAPI } from "../../api/api";
 
 export type propsTypeUsers = {
   users: Array<typeUser>,
-  follow: (UserId: number) => void,
-  unfollow: (UserId: number) => void,
   onPageChanged: (pageNumber: number) => void,
   totalUsersCount: number,
   pageSize: number,
   currentPage: number,
-  isFetching: boolean
+  followUsers: (userId: number) => void,
+  unfollowUsers: (userId: number) => void,
+  followingInProgress: Array<number>
 };
 
 
@@ -62,24 +60,12 @@ let Users = (props: propsTypeUsers) => {
               <img src={u.photos.small != null ? u.photos.small : userPhoto} alt="" />
             </NavLink>
             {u.followed
-              ? <button onClick={() => {
-
-                usersAPI.unfollowUser(u.id).then(data => {
-                  if (data.resultCode === 0) {
-                    debugger
-                    props.unfollow(u.id)
-                  }
-                });
-
+              ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                props.followUsers(u.id)
 
               }}>Unfollow</button>
-              : <button onClick={() => {
-
-                usersAPI.followUser(u.id).then(data => {
-                  if (data.resultCode === 0) {
-                    props.follow(u.id)
-                  }
-                });
+              : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                props.unfollowUsers(u.id)
 
               }}>Follow</button>}
           </div>
