@@ -3,6 +3,7 @@ import { setCurrentPage,getUsers, followUsers, unfollowUsers} from '../../redux/
 import React from "react";
 import Users, { typeUser } from "./Users";
 import Preloader from '../common/preloader/preloader';
+import { compose } from 'redux';
 
 
 export type propsTypeUsersContainer = {
@@ -59,30 +60,8 @@ let mapStateToProps = (state: any) => {
   }
 }
 
-// let mapDispatchToProps = (dispatch: any) => {
-//   return {
-//     follow: (userId: number) => {
-//       dispatch(followAC(userId))
-//     },
-//     unfollow: (userId: number) => {
-//       dispatch(unfolowAC(userId))
-//     },
-//     setUsers: (users: Array<typeUser>) => {
-//       dispatch(setUsersAC(users))
-//     },
-//     setCurrentPage: (currentPage: number) => {
-//       dispatch(setCurrentPageAC(currentPage))
-//     },
-//     setTotalUsersCount: (totalUsersCount: number) => {
-//       dispatch(setTotalUsersCountAC(totalUsersCount))
-//     },
-//     toogleIsFetching: (isFetching: boolean) => {
-//       dispatch(toogleIsFetchingAC(isFetching))
-//     }
-//   }
-// }
-
-export default connect(mapStateToProps,
+export default compose(
+  connect(mapStateToProps,
   {
     setCurrentPage,
     getUsers,
@@ -90,4 +69,4 @@ export default connect(mapStateToProps,
     unfollowUsers,
   }
 
-)(UsersContainer);
+))(UsersContainer);

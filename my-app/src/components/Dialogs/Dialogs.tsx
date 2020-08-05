@@ -25,7 +25,7 @@ const Dialogs = (props: propsTypeDialogs) => {
     const onMessangeChange = () => {
         props.onMessangeChange(newMessageElement.current.value)
     }
-    if (!props.isAuth) return <Redirect to={"/login"} />
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
