@@ -1,9 +1,10 @@
 import { ProfileType } from "../components/Profile/Profile";
-import { usersAPI } from "../api/api";
+import { usersAPI, profileAPI } from "../api/api";
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
-const SET_USER_PROFILE = "SET_USER_PROFILE"
+const SET_USER_PROFILE = "SET_USER_PROFILE";
+const SET_STATUS = "SET_STATUS";
 
 type AddPostActionType = {
   type: typeof ADD_POST
@@ -20,9 +21,15 @@ type setUserProfileActionType = {
   profile: ProfileType
 }
 
+type setStatusType = {
+  type: typeof SET_STATUS,
+  status: string
+}
+
 type ProfileActionType = AddPostActionType
   | UpdateNewPostTextActionType
   | setUserProfileActionType
+  | setStatusType
 
 let initialState = {
   postData: [
@@ -40,7 +47,8 @@ let initialState = {
     fullName: '',
     contacts: {},
     photos: {},
-  }
+  },
+  status: ''
 };
 
 type InitialStateType = typeof initialState;
@@ -68,6 +76,11 @@ const profileReducer = (state: InitialStateType = initialState, action: ProfileA
         ...state,
         profile: action.profile,
       };
+    case SET_STATUS:
+      return {
+        ...state,
+        status: action.status,
+      };
     default:
       return state;
   }
@@ -87,10 +100,33 @@ export const setUserProfile = (profile: ProfileType) => ({
   profile
 });
 
+export const setStatus = (status: string) => ({
+  type: SET_STATUS,
+  status
+});
+
 export const getProfile = (userId: number) => {
   return (dispatch: any) => {
     usersAPI.getProfile(userId).then(data => {
       dispatch(setUserProfile(data));
+    });
+  }
+}
+
+export const getStatus = (userId: number) => {
+  return (dispatch: any) => {
+    profileAPI.getStatus(userId).then(data => {
+      dispatch(setStatus(data));
+    });
+  }
+}
+
+export const updateStatus = (status: string) => {
+  return (dispatch: any) => {
+    profileAPI.updateStatus(status).then(data => {
+      if (data.resultCode === 0) {
+        dispatch(setStatus(status));
+      }
     });
   }
 }
