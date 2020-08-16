@@ -34,14 +34,29 @@ export const usersAPI = {
     getProfile(userId: number) {
         return profileAPI.getProfile(userId)
     },
+
+}
+
+export const authAPI = {
     getAuthMe() {
         return instance.get(`auth/me`)
             .then(response => {
                 return response.data;
             })
     },
+    login(email: string, password: string, rememberMe = false) {
+        return instance.post(`/auth/login`, { email, password, rememberMe})
+            .then(response => {
+                return response.data;
+            })
+    },
+    logout() {
+        return instance.delete(`/auth/login`)
+        .then(response => {
+            return response.data;
+        })
+    },
 }
-
 
 export const profileAPI = {
     getProfile(userId: number) {
