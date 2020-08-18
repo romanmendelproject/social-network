@@ -161,9 +161,10 @@ export const toogleFollowingProgress = (isFetching: boolean, userId: number) => 
   userId
 });
 
-export const getUsers = (currentPage: number, pageSize: number) => {
+export const requestUsers = (currentPage: number, pageSize: number) => {
   return (dispatch: any) => {
     dispatch(toogleIsFetching(true))
+    dispatch(setCurrentPage(currentPage))
     usersAPI.getUsers(currentPage, pageSize).then(data => {
       dispatch(toogleIsFetching(false))
       dispatch(setUsers(data.items))
